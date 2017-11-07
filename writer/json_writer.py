@@ -1,33 +1,31 @@
 #!/usr/bin/python3
-from robot.conf import RobotSettings
 from  collections import OrderedDict
 from pymongo import MongoClient
 from sys import exit
-from os import getcwd
+from os import getcwd, environ
 import xmltodict
 import json
 
-
-settings = RobotSettings()
 
 def create_json_output(xml_file, json_file):
     with open(xml_file) as fd:
         doc = xmltodict.parse(fd.read())
     with open(json_file, 'w') as f:
         f.write(json.dumps(doc['robot']))
-    p = getcwd() + "/logs/" + "output.json"
-    print('Json:   ', p)
+    print('Json:   ', json_file)
 
 def write_json_todb(json_file):
+    db_instances = environ.get('MONGO_DBS').split(',')
     with open(json_file) as jfile:
-        try:
-            client = MongoClient('127.0.0.1', 27017)
-            db = client.db0005
-        except:
-            print('can not connect to database')
-        result = db.db0005.insert_one(json.loads(jfile.read()))
-        print('Json:    ' + 'Written successfully to mongoDB')
+        json_data = json.loads(jfile.read())
+        for i in db_instances:
+            try:
+                ip,port = i.split(':')
+                client = MongoClient(ip, int(port))
+                db = client.json_db
+                result = db.json_db.insert_one(json_data)
+                client.close()
+                print('Json:    ' + 'Written successfully to mongoDB')
+            except:
+                print('Can not connect/write to DB')
 
-#if __name__ == "__main__":
-#    create_json_output(xml_file)
-#    write_json_todb(json_file)
