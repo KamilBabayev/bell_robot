@@ -23,7 +23,7 @@ To enable json output writing, new python  json_writer.py named script has been 
 writer directory on top robot library directory.  create_json_output and write_json_todb named two
 functions has been added to convert from xml to json and to write json data to MongoDB database.
 
-Below lines were added to writer/__init__.py package initialication file to enable import of these functions
+Below lines were added to writer/___init___.py package initialication file to enable import of these functions
 from other python files.
 
 ```
