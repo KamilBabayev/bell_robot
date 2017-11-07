@@ -1,6 +1,10 @@
-#  Adding JSON format output for robot framework 
+#  Adding custom JSON format output for robot framework 
 
 Repo contains custom code changes to python robot library
 which enables converting default xml output to json format.
 We get both output.xml and output.json files as a result 
 after running our robotframework based tests.
+
+## Getting Started
+These instructions will let you to clone and test this changes on your own environment.
+I have tested this code on Ubuntu 16.04.1. I intend that you have already installed robotframework.
