@@ -76,4 +76,8 @@ Json:    /home/user1/bell/tests/logs/output.json
 Json:    Written successfully to mongoDB
 ```
 
-
+JSON output seems like below:
+```
+user1@localhost:~$ cat  logs/output.json
+{"@generator": "Robot 3.0.2 (Python 3.5.2 on linux)", "@generated": "20171107 20:22:50.048", "suite": {"@source": "/home/user1/bell/tests/test1.robot", "@name": "Test1", "@id": "s1", "test": {"@name": "Test user defined keywork loaded from resource file", "@id": "s1-t1", "kw": {"@library": "resource", "@name": "Print welcome message for", "arguments": {"arg": "Mister President"}, "kw": {"@library": "BuiltIn", "@name": "Log", "doc": "Logs the given message with the given level.", "arguments": {"arg": "Welcome ${USER}!"}, "msg": {"@level": "INFO", "@timestamp": "20171107 20:22:50.096", "#text": "Welcome Mister President!"}, "status": {"@status": "PASS", "@starttime": "20171107 20:22:50.095", "@endtime": "20171107 20:22:50.096"}}, "status": {"@status": "PASS", "@starttime": "20171107 20:22:50.095", "@endtime": "20171107 20:22:50.096"}}, "status": {"@status": "PASS", "@critical": "yes", "@starttime": "20171107 20:22:50.094", "@endtime": "20171107 20:22:50.096"}}, "status": {"@status": "PASS", "@starttime": "20171107 20:22:50.050", "@endtime": "20171107 20:22:50.097"}}, "statistics": {"total": {"stat": [{"@pass": "1", "@fail": "0", "#text": "Critical Tests"}, {"@pass": "1", "@fail": "0", "#text": "All Tests"}]}, "tag": null, "suite": {"stat": {"@pass": "1", "@name": "Test1", "@fail": "0", "@id": "s1", "#text": "Test1"}}}, "errors": null}user1@cmtest:~/bell/tests$
+```
