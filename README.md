@@ -54,11 +54,26 @@ method on line 452. After this changes, output.json file must be created at the 
 ```
 
 > MONGO_DBS named environment variable must be created. json_writer.py will take db instanse info from this variable.
-> Example:   MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'
+> Example:   user1@localhost:~$ export MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'
 
 Running test cases will create output.json file beside output.xml file.
-```
 
+```
+user1@localhost:~$ pybot  -d logs   test1.robot
+==============================================================================
+Test1
+==============================================================================
+Test user defined keywork loaded from resource file                   | PASS |
+------------------------------------------------------------------------------
+Test1                                                                 | PASS |
+1 critical test, 1 passed, 0 failed
+1 test total, 1 passed, 0 failed
+==============================================================================
+Output:  /home/user1/bell/tests/logs/output.xml
+Log:     /home/user1/bell/tests/logs/log.html
+Report:  /home/user1/bell/tests/logs/report.html
+Json:    /home/user1/bell/tests/logs/output.json
+Json:    Written successfully to mongoDB
 ```
 
 
