@@ -36,7 +36,7 @@ from other python files.
 +from .json_writer import write_json_todb
 ```
 
-To enable json formatting new functions must be imported and executed from the main run.py file of robot library.
+To enable json formatting new functions must be imported and executed from the main __run.py__ file of robot library.
 Import functions on top of file.
 
 ```diff
@@ -53,6 +53,12 @@ method on line 452. After this changes, output.json file must be created at the 
 +455                  write_json_todb(json_file)
 ```
 
+> MONGO_DBS named environment variable must be created. json_writer.py will take db instanse info from this variable.
+> Example:   MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'
 
+Running test cases will create output.json file beside output.xml file.
+```
+
+```
 
 
