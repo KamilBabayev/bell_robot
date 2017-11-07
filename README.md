@@ -8,3 +8,8 @@ after running our robotframework based tests.
 ## Getting Started
 These instructions will let you to clone and test this changes on your own environment.
 I have tested this code on Ubuntu 16.04.1. I intend that you have already installed robotframework.
+Below python modules are required to install :
+```
+pip3 install pymongo
+pip3 install xmltodict
+```
