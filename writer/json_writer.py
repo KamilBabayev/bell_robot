@@ -28,7 +28,6 @@ def write_json_todb(json_file):
         result = db.db0005.insert_one(json.loads(jfile.read()))
         print('Json:    ' + 'Written successfully to mongoDB')
 
-if __name__ == "__main__":
-    create_json_output(xml_file)
-    write_json_todb(json_file)
-
+#if __name__ == "__main__":
+#    create_json_output(xml_file)
+#    write_json_todb(json_file)

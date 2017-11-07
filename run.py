@@ -43,6 +43,7 @@ from robot.output import LOGGER, pyloggingconf
 from robot.reporting import ResultWriter
 from robot.running import TestSuiteBuilder
 from robot.utils import Application, unic
+from robot.writer import create_json_output, write_json_todb
 
 
 USAGE = """Robot Framework -- A generic test automation framework
@@ -449,6 +450,10 @@ class RobotFramework(Application):
                 writer = ResultWriter(settings.output if settings.log
                                       else result)
                 writer.write_results(settings.get_rebot_settings())
+                xml_file, json_file = settings.output, settings.output_directory + "/output.json"
+                create_json_output(xml_file, json_file)
+                write_json_todb(json_file)
+
         return result.return_code
 
     def validate(self, options, arguments):
