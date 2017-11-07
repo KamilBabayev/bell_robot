@@ -26,16 +26,16 @@ functions has been added to convert from xml to json and to write json data to M
 Below lines were added to writer/_init_.py package initialication file to enable import of these functions
 from other python files.
 
-```
-from .json_writer import create_json_output
-from .json_writer import write_json_todb
+```diff
++from .json_writer import create_json_output
++from .json_writer import write_json_todb
 ```
 
 To enable json formatting new functions must be imported and executed from the main run.py file of robot library.
 Import functions on top of file.
 
-```
-from robot.writer import create_json_output, write_json_todb
+```diff
++from robot.writer import create_json_output, write_json_todb
 ```
 
 Execute these functions with shown arguments. Lines 453,454,455 must be added just after original write_results()
@@ -44,8 +44,8 @@ method on line 452. After this changes, output.json file must be created at the 
 ```diff
 452                  writer.write_results(settings.get_rebot_settings())
 +453                  xml_file, json_file = settings.output, settings.output_directory + "/output.json"
--454                  create_json_output(xml_file, json_file)
-455                  write_json_todb(json_file)
++454                  create_json_output(xml_file, json_file)
++455                  write_json_todb(json_file)
 ```
 
 
