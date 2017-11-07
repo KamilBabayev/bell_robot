@@ -23,8 +23,10 @@ To enable json output writing, new python  json_writer.py named script has been 
 writer directory on top robot library directory.  create_json_output and write_json_todb named two
 functions has been added to convert from xml to json and to write json data to MongoDB database.
 After cloning repository, json_writer.py file must be copied from repo to python robot package location.
+
 In my OS python3 robot package is located in /usr/local/lib/python3.5/dist-packages/robot directory.
-json_writer.py file must exists in /usr/local/lib/python3.5/dist-packages/robot/writer  directory.
+
+__json_writer.py__ file must exists in __/usr/local/lib/python3.5/dist-packages/robot/writer__  directory.
 
 Below lines were added to writer/_init_.py package initialication file to enable import of these functions
 from other python files.
