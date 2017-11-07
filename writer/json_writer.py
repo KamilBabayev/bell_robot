@@ -15,7 +15,12 @@ def create_json_output(xml_file, json_file):
     print('Json:   ', json_file)
 
 def write_json_todb(json_file):
-    db_instances = environ.get('MONGO_DBS').split(',')
+    try:
+        db_instances = environ.get('MONGO_DBS').split(',')
+    except:
+        print('\n')
+        print("Not such env variable named MONGO_DBS, create before running tests")
+        print("Example: MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'")
     with open(json_file) as jfile:
         json_data = json.loads(jfile.read())
         for i in db_instances:
