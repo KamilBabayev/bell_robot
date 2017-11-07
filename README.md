@@ -43,7 +43,7 @@ method on line 452. After this changes, output.json file must be created at the 
 
 ```
 452                  writer.write_results(settings.get_rebot_settings())
-453                  xml_file, json_file = settings.output, settings.output_directory + "/output.json"
+![#f03c15]453                  xml_file, json_file = settings.output, settings.output_directory + "/output.json" `#f03c15`
 454                  create_json_output(xml_file, json_file)
 455                  write_json_todb(json_file)
 ```
