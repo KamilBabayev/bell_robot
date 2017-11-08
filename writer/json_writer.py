@@ -25,7 +25,7 @@ def write_json_todb(json_file):
     except:
         print '\n'
         print "Not such env variable named MONGO_DBS, create before running tests"
-        print "Example: MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'"
+        print "Example: export MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'"
         exit()
     with open(json_file) as jfile:
         json_data = json.loads(jfile.read())
