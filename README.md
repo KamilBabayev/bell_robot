@@ -55,12 +55,16 @@ method on line 452. After this changes, output.json file must be created at the 
 +455                  write_json_todb(json_file)
 ```
 
+
 > MONGO_DBS and  MONGO_DB_NAME named environment variables must be created. json_writer.py will take db instanse info and 
 > db name from these variables.
+
 ```
 Example:   user1@localhost:~$ export MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'
 Example:   user1@localhost:~$ export MONGO_DB_NAME=net_db01
 ```
+
+
 Running test cases will create output.json file beside output.xml file.
 
 ```
