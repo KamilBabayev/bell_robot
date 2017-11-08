@@ -20,7 +20,7 @@ git clone  -b json_output https://github.com/KamilBabayev/bell_robot.git
 ```
 
 To enable json output writing, new python  json_writer.py named script has been added to
-writer directory on top robot library directory.  create_json_output and write_json_todb named two
+writer directory on top robot library directory. __create_json_output__ and __write_json_todb__ named two
 functions has been added to convert from xml to json and to write json data to MongoDB database.
 After cloning repository, json_writer.py file must be copied from repo to python robot package location.
 
