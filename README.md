@@ -25,6 +25,8 @@ functions has been added to convert from xml to json and to write json data to M
 After cloning repository, json_writer.py file must be copied from repo to python robot package location.
 
 In my OS python3 robot package is located in /usr/local/lib/python3.5/dist-packages/robot directory.
+On Centos7 python2 robot package is locates in /usr/lib/python2.7/site-packages/robot .  If virtualenv is used, 
+changes must be done in suitable locations as well.
 
 __json_writer.py__ file must exists in __/usr/local/lib/python3.5/dist-packages/robot/writer__  directory.
 
