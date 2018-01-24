@@ -80,7 +80,8 @@ Output:  /home/user1/bell/tests/logs/output.xml
 Log:     /home/user1/bell/tests/logs/log.html
 Report:  /home/user1/bell/tests/logs/report.html
 Json:    /home/user1/bell/tests/logs/output.json
-Json:    Written successfully to mongoDB
+Json:    posted json output to  http://172.17.0.18:9999/automation/results/testing
+{"results": {"$oid": "5a68aade1413792215feb92f"}}
 ```
 
 JSON output seems like below:
