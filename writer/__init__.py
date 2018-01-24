@@ -25,5 +25,4 @@ This package is considered stable, although the planned changes to
 
 from .datafilewriter import DataFileWriter
 from .json_writer import create_json_output
-from .json_writer import write_json_todb
 

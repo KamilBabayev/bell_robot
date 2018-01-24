@@ -5,6 +5,7 @@ from sys import exit
 from os import getcwd, environ
 import xmltodict
 import json
+import requests
 
 
 def create_json_output(xml_file, json_file):
@@ -14,29 +15,15 @@ def create_json_output(xml_file, json_file):
         f.write(json.dumps(doc['robot']))
     print 'Json:   ', json_file
 
-def write_json_todb(json_file):
-    db_name = environ.get('MONGO_DB_NAME')
-    if not db_name:
-        print '\n'
-        print "Environment variable MONGO_DB_NAME does not exist. Example: export MONGO_DB_NAME='testdb01'"
-        exit()
-    try:
-        db_instances = environ.get('MONGO_DBS').split(',')
-    except:
-        print '\n'
-        print "Not such env variable named MONGO_DBS, create before running tests"
-        print "Example: export MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'"
-        exit()
-    with open(json_file) as jfile:
-        json_data = json.loads(jfile.read())
-        for instance in db_instances:
-            try:
-                ip,port = instance.split(':')
-                client = MongoClient(ip, int(port))
-                db = client[db_name]
-                result = db[db_name].insert_one(json_data)
-                client.close()
-                print('Json:    ' + 'Written successfully to mongoDB')
-            except:
-                print('Can not connect/write to DB')
+    # Post json data to gateway api
+    mongo_api_host = environ.get('API_GATEWAY_SERVICE_ENDPOINT')
+    mongo_api_port = environ.get('API_GATEWAY_SERVICE_PORT')
+    mongo_db_name = environ.get('MONGO_DB_NAME')
+    gateway_api_url = "http://" + str(mongo_api_host) + ":" + str(mongo_api_port) + "/automation/results/testing"
+    payload = json.dumps(doc['robot'])
+    payload = json.loads(payload)
+    r = requests.post(gateway_api_url, json=payload)
+    print 'Json:    ' + 'posted json output to ', gateway_api_url
+    print r.text
+
 
