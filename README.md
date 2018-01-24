@@ -13,10 +13,11 @@ Below python modules are required to install :
 ```
 pip3 install pymongo
 pip3 install xmltodict
+pip3 install requests
 ```
 In order to clone repo:
 ```
-git clone  -b json_output https://github.com/KamilBabayev/bell_robot.git
+git clone  -b json-api-gateway https://github.com/KamilBabayev/bell_robot.git
 ```
 
 To enable json output writing, new python  json_writer.py named script has been added to
@@ -35,14 +36,13 @@ from other python files.
 
 ```diff
 +from .json_writer import create_json_output
-+from .json_writer import write_json_todb
 ```
 
 To enable json formatting new functions must be imported and executed from the main __run.py__ file of robot library.
 Import functions on top of file.
 
 ```diff
-+from robot.writer import create_json_output, write_json_todb
++from robot.writer import create_json_output
 ```
 
 Execute these functions with shown arguments. Lines 453,454,455 must be added just after original write_results()
@@ -52,16 +52,14 @@ method on line 452. After this changes, output.json file must be created at the 
 452                  writer.write_results(settings.get_rebot_settings())
 +453                  xml_file, json_file = settings.output, settings.output_directory + "/output.json"
 +454                  create_json_output(xml_file, json_file)
-+455                  write_json_todb(json_file)
 ```
 
 
-> MONGO_DBS and  MONGO_DB_NAME named environment variables must be created. json_writer.py will take db instanse info and 
-> db name from these variables.
+> API_GATEWAY_SERVICE_ENDPOINT and  API_GATEWAY_SERVICE_ENDPOINT  named environment variables must be created. json_writer.py form post url from these  variables.
 
 ```
-Example:   user1@localhost:~$ export MONGO_DBS='127.0.0.1:27017,127.0.0.2:27017'
-Example:   user1@localhost:~$ export MONGO_DB_NAME=net_db01
+Example:   user1@localhost:~$ export API_GATEWAY_SERVICE_ENDPOINT='172.17.0.18'
+Example:   user1@localhost:~$ export API_GATEWAY_SERVICE_PORT='9999'
 ```
 
 
@@ -119,20 +117,10 @@ user1@localhost:~$ cat output.json | python -m json.tool
 ....
 ```
 
-Querying result from mongo shell:
+Querying result from webapi:
 ```
-user1@localhost:~$ mongo
-MongoDB shell version: 3.2.17
-connecting to: test
->
-> use json_db
-switched to db json_db
-> db.json_db.find()
-{ "_id" : ObjectId("5a01df56c5be9140b02c189a"), "errors" : null, "statistics" : { "tag" : null, "suite" : { "stat" : { "@name" : "Test1", "@pass" : "1", "@id" : "s1", "@fail" : "0", "#text" : "Test1" } }, "total" : { "stat" : [ { "@pass" : "1", "#text" : "Critical Tests", "@fail" : "0" }, { "@pass" : "1", "#text" : "All Tests", "@fail" : "0" } ] } }, "suite" : { "@name" : "Test1", "test" : { "@name" : "Test user defined keywork loaded from resource file", "status" : { "@starttime" : "20171107 20:29:10.121", "@endtime" : "20171107 20:29:10.124", "@status" : "PASS", "@critical" : "yes" }, "@id" : "s1-t1", "kw" : { "@name" : "Print welcome message for", "status" : { "@starttime" : "20171107 20:29:10.122", "@status" : "PASS", "@endtime" : "20171107 20:29:10.124" }, "@library" : "resource", "kw" : { "@name" : "Log", "msg" : { "@level" : "INFO", "#text" : "Welcome Mister President!", "@timestamp" : "20171107 20:29:10.123" }, "status" : { "@starttime" : "20171107 20:29:10.123", "@status" : "PASS", "@endtime" : "20171107 20:29:10.123" }, "doc" : "Logs the given message with the given level.", "@library" : "BuiltIn", "arguments" : { "arg" : "Welcome ${USER}!" } }, "arguments" : { "arg" : "Mister President" } } }, "@source" : "/home/user1/bell/tests/test1.robot", "@id" : "s1", "status" : { "@starttime" : "20171107 20:29:10.076", "@status" : "PASS", "@endtime" : "20171107 20:29:10.125" } }, "@generated" : "20171107 20:29:10.074", "@generator" : "Robot 3.0.2 (Python 3.5.2 on linux)" }
->
-```
-
-To print document in pretty way from mongo shell:
-```
-> db.json_db.find().pretty()
+To show specified record
+http get   http://172.17.0.18:5959/automation/results/testing/5a689c62141379162d51bb3e
+To show all data
+http get   http://172.17.0.18:5959/automation/results/testing
 ```
